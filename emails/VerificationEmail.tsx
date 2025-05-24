@@ -11,15 +11,20 @@ import {
 } from '@react-email/components';
 
 interface PlaidVerifyIdentityEmailProps {
-  validationCode?: string;
+  verifyCode?: string;
+  username?: string;
 }
 
 const baseUrl = process.env.VERCEL_URL
   ? `https://${process.env.VERCEL_URL}`
   : '';
 
-export const PlaidVerifyIdentityEmail = ({
-  validationCode,
+
+
+
+export const VerificationEmail= ({
+  verifyCode,
+  username
 }: PlaidVerifyIdentityEmailProps) => (
   <Html>
     <Head />
@@ -37,7 +42,8 @@ export const PlaidVerifyIdentityEmail = ({
           Enter the following code to finish linking Venmo.
         </Heading>
         <Section style={codeContainer}>
-          <Text style={code}>{validationCode}</Text>
+          <Text style={code}>Hey, {username}</Text>
+          <Text style={code}>{verifyCode}</Text>
         </Section>
         <Text style={paragraph}>Not expecting this email?</Text>
         <Text style={paragraph}>
@@ -53,11 +59,8 @@ export const PlaidVerifyIdentityEmail = ({
   </Html>
 );
 
-PlaidVerifyIdentityEmail.PreviewProps = {
-  validationCode: '144833',
-} as PlaidVerifyIdentityEmailProps;
 
-export default PlaidVerifyIdentityEmail;
+export default VerificationEmail;
 
 const main = {
   backgroundColor: '#ffffff',
